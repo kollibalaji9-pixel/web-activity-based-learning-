@@ -1,0 +1,185 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Bliss Bakery</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#fff8f0;color:#4b2924}
+header{background:#7b3f35;color:white;padding:20px 7%;
+display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+header h1{color:#ffd6dc}
+nav a{color:white;text-decoration:none;margin:10px;font-weight:bold}
+nav a:hover{color:#ffc0cb}
+.hero{text-align:center;padding:80px 20px;background:#f8d7da}
+.hero h2{font-size:40px;margin-bottom:15px}
+.hero p{font-size:18px;margin-bottom:25px}
+.btn{display:inline-block;background:#7b3f35;color:white;
+padding:12px 25px;border-radius:25px;text-decoration:none;border:none;cursor:pointer}
+.btn:hover{background:#a05245}
+section{padding:45px 7%;text-align:center}
+h2{margin-bottom:25px;color:#7b3f35}
+.filters{margin-bottom:25px}
+.filters button{margin:5px;padding:10px 18px;border:0;
+background:#f3c6c9;border-radius:20px;cursor:pointer}
+.filters button:hover{background:#7b3f35;color:white}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}
+.card{background:white;border-radius:15px;overflow:hidden;
+box-shadow:0 4px 12px #0001;padding-bottom:20px;transition:.3s}
+.card:hover{transform:translateY(-5px)}
+.card img{width:100%;height:190px;object-fit:cover}
+.card h3{margin:15px 0 8px}
+.card p{margin:8px}
+.price{color:#b74747;font-size:20px;font-weight:bold}
+.offer{background:#7b3f35;color:white;padding:35px 15px}
+.offer h2{color:#ffd6dc}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.gallery img{width:100%;height:180px;object-fit:cover;border-radius:12px}
+.custom{background:#fbe2df}
+input,textarea{width:100%;padding:12px;margin:8px 0;
+border:1px solid #ddd;border-radius:8px}
+form{max-width:500px;margin:auto}
+footer{background:#4b2924;color:white;text-align:center;padding:25px}
+footer p{margin:8px}
+@media(max-width:600px){
+header{justify-content:center;gap:12px}
+nav{text-align:center}
+.hero h2{font-size:30px}
+section{padding:35px 5%}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🍰 Sweet Bliss</h1>
+<nav>
+<a href="#home">Home</a>
+<a href="#menu">Menu</a>
+<a href="#offers">Offers</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<h2>Freshly Baked Happiness!</h2>
+<p>Delicious cakes, pastries and cookies made with love.</p>
+<a href="#menu" class="btn">Explore Our Menu</a>
+</section>
+
+<section id="menu">
+<h2>Our Delicious Menu 🧁</h2>
+<div class="filters">
+<button onclick="filterItems('all')">All</button>
+<button onclick="filterItems('cake')">Cakes</button>
+<button onclick="filterItems('pastry')">Pastries</button>
+<button onclick="filterItems('cookie')">Cookies</button>
+</div>
+<div class="products">
+
+<div class="card" data-category="cake">
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500" alt="Chocolate cake">
+<h3>Chocolate Cake</h3><p>Rich chocolate delight</p>
+<p class="price">₹550</p>
+<button class="btn" onclick="order('Chocolate Cake')">Order Now</button>
+</div>
+
+<div class="card" data-category="cake">
+<img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=500" alt="Birthday cake">
+<h3>Birthday Cake</h3><p>Perfect for celebrations</p>
+<p class="price">₹750</p>
+<button class="btn" onclick="order('Birthday Cake')">Order Now</button>
+</div>
+
+<div class="card" data-category="pastry">
+<img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500" alt="Cream pastry">
+<h3>Fresh Pastry</h3><p>Soft and creamy</p>
+<p class="price">₹90</p>
+<button class="btn" onclick="order('Fresh Pastry')">Order Now</button>
+</div>
+
+<div class="card" data-category="cookie">
+<img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500" alt="Cookies">
+<h3>Chocolate Cookies</h3><p>Crunchy and delicious</p>
+<p class="price">₹150</p>
+<button class="btn" onclick="order('Chocolate Cookies')">Order Now</button>
+</div>
+
+</div>
+</section>
+
+<section class="offer" id="offers">
+<h2>🎉 Special Seasonal Offers 🎉</h2>
+<h3>Sweet Festival Sale — Get 20% OFF!</h3>
+<p>Enjoy special discounts on selected cakes and bakery treats.</p>
+<p>Use Code: SWEET20</p>
+<br><a href="#menu" class="btn">Shop Now</a>
+</section>
+
+<section id="gallery">
+<h2>Our Bakery Gallery 📸</h2>
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400" alt="Chocolate cake">
+<img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400" alt="Pastry">
+<img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400" alt="Cookies">
+<img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=400" alt="Celebration cake">
+</div>
+</section>
+
+<section class="custom">
+<h2>🎂 Custom Cake Designs</h2>
+<p>Make birthdays, weddings and celebrations unforgettable!</p>
+<p>Choose your flavour, size, colour and design.</p>
+<p><strong>Custom cakes start at ₹999</strong></p>
+<br><a href="#contact" class="btn">Request a Custom Cake</a>
+</section>
+
+<section id="contact">
+<h2>Contact Our Bakery 📞</h2>
+<p>📍 Address: Main Road, Vuyyuru, Andhra Pradesh</p>
+<p>📞 Phone: +91 98765 43210</p>
+<p>✉️ Email: sweetbliss@example.com</p>
+<br>
+<h3>Send an Enquiry</h3>
+<form onsubmit="sendMessage(event)">
+<input id="name" placeholder="Your Name" required>
+<input id="phone" placeholder="Your Phone Number" required>
+<textarea id="message" placeholder="Your order or enquiry" required></textarea>
+<button class="btn" type="submit">Send Enquiry</button>
+</form>
+</section>
+
+<footer>
+<h3>🍰 Sweet Bliss Bakery</h3>
+<p>Making Every Celebration Sweeter!</p>
+<p>© 2026 Sweet Bliss Bakery | All Rights Reserved</p>
+</footer>
+
+<script>
+function filterItems(category){
+document.querySelectorAll('.card').forEach(card=>{
+card.style.display=(category==='all' ||
+card.dataset.category===category)?'block':'none';
+});
+}
+
+function order(product){
+alert('Thank you for choosing '+product+
+'! Please contact our bakery to confirm your order.');
+}
+
+function sendMessage(event){
+event.preventDefault();
+let name=document.getElementById('name').value;
+let message=document.getElementById('message').value;
+alert('Thank you, '+name+'! Your enquiry has been noted: '+message);
+event.target.reset();
+}
+</script>
+
+</body>
+</html>
+```
