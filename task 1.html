@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ElectroMart | Electronics Store</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f4f6f9;color:#222}
+header{background:#101827;color:white;padding:22px;text-align:center}
+header h1{color:#38bdf8}
+nav{background:#1e293b;padding:15px;text-align:center}
+nav a{color:white;text-decoration:none;margin:12px}
+.container{max-width:1200px;margin:25px auto;padding:15px}
+.filters{text-align:center;margin-bottom:25px}
+button,select{padding:10px 15px;margin:5px;border:0;border-radius:5px;cursor:pointer}
+button{background:#0284c7;color:white}
+button:hover{background:#0369a1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:white;border-radius:10px;padding:20px;box-shadow:0 3px 12px #ddd;position:relative}
+.card img{width:100%;height:140px;object-fit:contain}
+.card h3{margin:12px 0}
+.card p{margin:8px 0;color:#555;font-size:14px}
+.price{color:#0284c7;font-size:21px;font-weight:bold}
+.old{text-decoration:line-through;color:#888;font-size:14px}
+.badge{background:#ef4444;color:white;padding:5px;border-radius:4px}
+h2{margin:25px 0 15px}
+table{width:100%;border-collapse:collapse;background:white;margin-top:15px}
+th,td{padding:12px;border:1px solid #ddd;text-align:center}
+th{background:#1e293b;color:white}
+.details{background:white;padding:20px;margin-top:25px;border-radius:10px}
+footer{background:#101827;color:white;text-align:center;padding:20px;margin-top:30px}
+@media(max-width:600px){nav a{display:inline-block;margin:7px}table{font-size:12px}th,td{padding:7px}}
+</style>
+</head>
+<body>
+<header><h1>⚡ ElectroMart</h1><p>Your One-Stop Electronics Store</p></header>
+<nav><a href="#products">Products</a><a href="#compare">Compare</a><a href="#details">Details</a></nav>
+<div class="container">
+<h2>Explore Electronics</h2>
+<div class="filters">
+<select id="category" onchange="filterProducts()">
+<option value="all">All Categories</option><option>Laptop</option>
+<option>Smartphone</option><option>Accessories</option><option>Smart Device</option>
+</select>
+<input id="search" placeholder="Search products..." oninput="filterProducts()">
+</div>
+<div class="grid" id="products"></div>
+<h2 id="compare">Product Comparison</h2>
+<table><thead><tr><th>Feature</th><th>Laptop</th><th>Smartphone</th><th>Smartwatch</th></tr></thead>
+<tbody>
+<tr><td>Price</td><td>₹59,999</td><td>₹24,999</td><td>₹4,999</td></tr>
+<tr><td>RAM</td><td>16 GB</td><td>8 GB</td><td>1 GB</td></tr>
+<tr><td>Storage</td><td>512 GB SSD</td><td>128 GB</td><td>32 GB</td></tr>
+<tr><td>Display</td><td>15.6 inch</td><td>6.5 inch</td><td>1.8 inch</td></tr>
+</tbody></table>
+<div class="details" id="details"><h2>Product Details</h2>
+<p>Select any product to view its specifications.</p></div>
+</div>
+<footer><p>© 2026 ElectroMart | Shop Smart, Live Smart</p></footer>
+<script>
+const items=[
+{name:"ProBook Laptop",cat:"Laptop",price:59999,old:69999,
+img:"💻",spec:"Intel Core i5, 16GB RAM, 512GB SSD"},
+{name:"Galaxy Smartphone",cat:"Smartphone",price:24999,old:29999,
+img:"📱",spec:"8GB RAM, 128GB Storage, 5000mAh Battery"},
+{name:"Wireless Headphones",cat:"Accessories",price:1999,old:2999,
+img:"🎧",spec:"Bluetooth 5.3, Noise Cancellation"},
+{name:"Smart Watch",cat:"Smart Device",price:4999,old:6999,
+img:"⌚",spec:"Heart Rate Monitor, AMOLED Display"},
+{name:"Gaming Laptop",cat:"Laptop",price:79999,old:89999,
+img:"🖥️",spec:"Core i7, 16GB RAM, RTX Graphics"},
+{name:"Bluetooth Speaker",cat:"Accessories",price:1499,old:2499,
+img:"🔊",spec:"Portable, Waterproof, 12-Hour Battery"}
+];
+function render(list){
+document.getElementById("products").innerHTML=list.map(p=>`
+<div class="card"><span class="badge">${Math.round((1-p.price/p.old)*100)}% OFF</span>
+<div style="font-size:75px;text-align:center;padding:15px">${p.img}</div>
+<h3>${p.name}</h3><p>${p.spec}</p>
+<div class="price">₹${p.price.toLocaleString("en-IN")}</div>
+<p class="old">₹${p.old.toLocaleString("en-IN")}</p>
+<button onclick="showDetails('${p.name}')">View Details</button>
+<button onclick="compare('${p.name}')">Compare</button></div>`).join("");
+}
+function filterProducts(){
+let c=document.getElementById("category").value;
+let s=document.getElementById("search").value.toLowerCase();
+render(items.filter(p=>(c==="all"||p.cat===c)&&p.name.toLowerCase().includes(s)));
+}
+function showDetails(name){
+let p=items.find(x=>x.name===name);
+document.getElementById("details").innerHTML=`<h2>${p.name}</h2>
+<p>Category: ${p.cat}</p><p>Specifications: ${p.spec}</p>
+<h3>Price: ₹${p.price.toLocaleString("en-IN")}</h3>
+<p>Discount: ${Math.round((1-p.price/p.old)*100)}% OFF</p>`;
+document.getElementById("details").scrollIntoView({behavior:"smooth"});
+}
+function compare(name){
+let p=items.find(x=>x.name===name);
+alert(p.name+"\nCategory: "+p.cat+"\nPrice: ₹"+p.price+"\nSpecifications: "+p.spec);
+}
+render(items);
+</script>
+</body>
+</html>
